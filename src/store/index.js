@@ -1,10 +1,10 @@
 import { createStore, combineReducers } from 'redux'
 // import countReducer, { renderCountReducer } from './countReducer'
-import { usersReducer } from './usersReducer'
+import { usersReducer } from './globalReducer'
 // import { applyMiddleware } from 'redux'
 // import thunk from 'redux-thunk'
 import { configureStore } from '@reduxjs/toolkit'
-import globalReducer from './usersReducer'
+import globalReducer from './globalReducer'
 
 
 const rootReducer = combineReducers({

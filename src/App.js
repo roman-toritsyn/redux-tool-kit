@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
-import { addCount, addUser, deleteUser } from './store/usersReducer';
+import { addCount, addUser, deleteUser } from './store/globalReducer';
 
 function App() {
   const dispatch = useDispatch()
