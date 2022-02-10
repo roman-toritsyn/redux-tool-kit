@@ -1,57 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import { addCount, addUser, deleteUser } from './store/usersReducer';
 
 function App() {
+  const dispatch = useDispatch()
+  const users = useSelector(state => state.global.users)
+  const count = useSelector(state => state.global.count)
+
+  const [newUserName, setNewUserName] = useState('')
+
+    console.log(count);
+    console.log(users);
+
+  const usersList = users.map(
+    user => <div key={user.id}>{user.name}</div>
+  )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <>
+    <button onClick={() => dispatch(addCount())}>Count++</button>
+    <div>Count: {count}</div>
+      <div className="App">
+        Users:
+        {usersList}
+      </div>
+      <div>
+        <button onClick={() => dispatch(addUser(newUserName))}>Create user</button>
+        <input
+          value={newUserName}
+          placeholder={'Name of new user'}
+          onChange={event => dispatch(setNewUserName(event.target.value))}
+        >
+        </input>
+        <button onClick={() => dispatch(deleteUser(newUserName))}>Delete user</button>
+      </div>
+    </>
   );
 }
 
